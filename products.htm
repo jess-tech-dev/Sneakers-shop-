@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <style>
+        /* Layout for header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #8f3bff, #ff6fb1);
+  color: white;
+  padding: 1rem;
+}
+
+.logo {
+  font-size: 1.8rem;
+}
+
+.cart-status {
+  text-align: right;
+  font-weight: bold;
+}
+
+/* Grid of sneakers */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.product-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  padding: 1rem;
+  text-align: center;
+  transition: transform .3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Buttons + Quantity */
+.qty {
+  width: 50px;
+  margin: 10px 0;
+}
+
+button {
+  background-color: #8f3bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #6e29d5;
+}
+
+/* Cart items below */
+#cart-items {
+  margin: 2rem;
+  list-style: none;
+  padding: 0;
+}
+    </style>
+</head>
+<body>
+    <header>
+  <h1 class="logo">SneakerZone</h1>
+  <div class="cart-status">
+    <span id="cart-count">🛒 0 items</span><br>
+    <span id="total-price">$0.00</span>
+  </div>
+</header>
+
+<main class="product-grid">
+  <div class="product-card">
+    <img src="nikesneakers.jpg" alt="Air Max">
+    <h3>Air Max</h3>
+    <p>$120</p>
+    <input type="number" class="qty" value="1" min="1">
+    <button data-price="120">Add to Cart</button>
+  </div>
+  <!-- Copy this block for more sneakers -->
+</main>
+
+<ul id="cart-items"></ul>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+  const buttons = document.querySelectorAll("button[data-price]");
+  const cartList = document.getElementById("cart-items");
+  const cartCount = document.getElementById("cart-count");
+  const totalPriceEl = document.getElementById("total-price");
+  let cartItems = [];
+
+  function updateDisplay() {
+    const totalItems = cartItems.reduce((sum, i) => sum + i.quantity, 0);
+    const totalPrice = cartItems.reduce((sum, i) => sum + i.total, 0);
+    cartCount.textContent = `🛒 ${totalItems} item${totalItems !== 1 ? 's' : ''}`;
+    totalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
+  }
+
+  function renderCart() {
+    cartList.innerHTML = "";
+    cartItems.forEach((item, index) => {
+      const li = document.createElement("li");
+      li.innerHTML = `${item.name} - $${item.price} × ${item.quantity} = $${item.total.toFixed(2)} 
+        <button class="remove-btn">Remove</button>`;
+      li.querySelector(".remove-btn").addEventListener("click", () => {
+        cartItems.splice(index, 1);
+        renderCart();
+        updateDisplay();
+      });
+      cartList.appendChild(li);
+    });
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener("click", function () {
+      const card = this.closest(".product-card");
+      const name = card.querySelector("h3").textContent;
+      const qty = parseInt(card.querySelector(".qty").value) || 1;
+      const price = parseFloat(this.dataset.price);
+      const total = price * qty;
+      cartItems.push({ name, price, quantity: qty, total });
+      renderCart();
+      updateDisplay();
+    });
+  });
+
+  updateDisplay();
+});
+</script>
+</body>
+</html>

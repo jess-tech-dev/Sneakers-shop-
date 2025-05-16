@@ -1,0 +1,103 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sneaker Shop</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f5f5; /* Pale gray */
+  color: #333;               /* Dark gray text */
+  line-height: 1.6;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul {
+  list-style: none;
+}
+
+/* Header Styles */
+header {
+  background-color: #ff8c42; /* Pale orange */
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: ivory;
+}
+nav ul {
+  display: flex;
+  gap: 1.5rem;
+}
+nav a {
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+nav a:hover {
+  color: #2f2f2f; /* Dark gray on hover */
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(to right, #ffe5b4, #ff8c42); /* Pale to dark orange */
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #2f2f2f;
+}
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-size: 1.2rem;
+}
+
+/* Footer */
+footer {
+  background-color: #2f2f2f; /* Dark gray */
+  color: ivory;
+  text-align: center;
+  padding: 1rem 2rem;
+  margin-top: 2rem;
+}</style>
+</head>
+<body>
+  <header>
+    <div class="logo">SneakerShop</div>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="products.htm">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.htm">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Fresh Kicks for Every Step</h1>
+      <p>Explore our latest sneaker drops.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 SneakerShop. All rights reserved.</p>
+  </footer>
+</body>
+</html>
